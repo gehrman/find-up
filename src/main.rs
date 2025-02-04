@@ -1,3 +1,8 @@
+use std::env::current_dir;
+
+
 fn main() {
-    println!("Hello, world!");
+    for dir in current_dir().unwrap().ancestors() {
+        println!("Dir is {}", dir.display());
+    }
 }
