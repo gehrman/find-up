@@ -2,15 +2,16 @@ use clap::Parser;
 use std::env::current_dir;
 use std::process::exit;
 
-/// Search up the directory tree for file named TARGET
+/// Search up the directory tree, starting in the current directory, for a file
+/// named TARGET.
 #[derive(Parser, Debug)]
-#[command(version, about, long_about)]
+#[command(version, about)]
 struct Args {
-    /// Optional file name to search for
+    /// the name of the file to search for (optional, default .env)
     target: Option<String>,
 
-    /// Control the verbosity
-    #[arg(short, default_value_t = false)]
+    /// Use verbose output
+    #[arg(short, long, default_value_t = false)]
     verbose: bool,
 }
 
@@ -32,6 +33,7 @@ fn main() {
             exit(0)
         }
     }
+
     if args.verbose {
         println!("{} not found", needle);
     }
