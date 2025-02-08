@@ -20,13 +20,13 @@ fn main() {
         println!("Called with {:?}", args);
     }
 
-    let needle = match args.target {
+    let needle = match &args.target {
         Some(name) => name,
-        None => String::from(".env"),
+        None => ".env",
     };
 
     for dir in current_dir().unwrap().ancestors() {
-        let file = dir.join(needle.clone());
+        let file = dir.join(needle);
         if file.exists() {
             println!("{}", file.display());
             exit(0)
