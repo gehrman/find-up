@@ -1,4 +1,5 @@
 use clap::Parser;
+use clap::ArgAction;
 use std::env::current_dir;
 use std::process::exit;
 
@@ -10,14 +11,14 @@ struct Args {
     /// the name of the file to search for (optional, default .env)
     target: Option<String>,
 
-    /// Use verbose output
-    #[arg(short, long, default_value_t = false)]
-    verbose: bool,
+    /// Set the verbosity output of the output, e.g. -vvvv for debug output
+    #[arg(short, long, action = ArgAction::Count)]
+    verbose: u8,
 }
 
 fn main() {
     let args = Args::parse();
-    if args.verbose {
+    if args.verbose > 2 {
         println!("Called with {:?}", args);
     }
 
@@ -34,7 +35,7 @@ fn main() {
         }
     }
 
-    if args.verbose {
+    if args.verbose > 0 {
         println!("{} not found", needle);
     }
     exit(1)
