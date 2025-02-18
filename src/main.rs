@@ -4,7 +4,7 @@ use std::env::current_dir;
 use std::process::exit;
 
 /// Search up the directory tree, starting in the current directory, for a file
-/// named TARGET.
+/// named TARGET. Prints the full path of the file if found.
 #[derive(Parser, Debug)]
 #[command(version, about)]
 struct Args {
